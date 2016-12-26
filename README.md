@@ -1,4 +1,6 @@
-### Android WebView
+## Android WebView
+
+---
 
 使用WebView开发的坑很多，这是众所周知的。本文分别对WebView的三个基本控件（俗称三剑客`WebViewClient`，`WebChromeClient`,`WebView`）做了一些封装，方便使用，避免掉坑里。
 
@@ -8,7 +10,7 @@
 2. **全屏播放视频**
 3. **封装更加简单易用生命周期api，使用这些生命周期的方法可以避免很多与H5交互的坑**
 
-#### CustomWebViewClient
+### CustomWebViewClient
 
 在`WebViewClient`中主要是对`onReceivedError`方法进行重写。这里面的逻辑这样的：
 
@@ -16,12 +18,7 @@
 2. 如果这个出错的url就是本地的静态文件，那么也显示自定义访问出错页面。
 
 ```java
-public class CustomWebViewClient extends WebViewClient {
-  
-    ...
-      
-    @Override
-    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
         if (view == null) {
             return; // 极端情况下可能出现，加个保险
         }
@@ -38,35 +35,14 @@ public class CustomWebViewClient extends WebViewClient {
 
         Log.d(TAG, "onReceivedError-> errorCode=" + errorCode + ",desc=" + description + ",failingUrl=" + failingUrl);
     }
-
-    @TargetApi(23)
-    @Override
-    public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-        if (view == null) {
-            return; // 极端情况下可能出现，加个保险
-        }
-        super.onReceivedError(view, request, error);//这里会回调上面那个onReceivedError方法
-        log(request);
-    }
-    ...
-}
-
 ```
 
-#### CustomWebChromeClient
+### CustomWebChromeClient
 
 在这里主要是实现视频全屏播放的逻辑，重写`onShowCustomView()`和`onHideCustomView()`方法
 
 ```java
-/**
- * 加强版WebChromeClient
- * Created by wecodexyz on 2016/12/23.
- */
-public class CustomWebChromeClient extends WebChromeClient {
-
-    ...
-
-    @Override
+@Override
     public void onShowCustomView(View view, CustomViewCallback callback) {
         if (view == null) {
             return;
@@ -148,11 +124,9 @@ public class CustomWebChromeClient extends WebChromeClient {
         activity.setRequestedOrientation(mOriginalOrientation);
         mActivity = null;
     }
-    ...
-}
 ```
 
-#### CustomWebView
+### CustomWebView
 
 在CustomWebView中封装了生命周期方法，`resume()`,`pause()`,`destroy()` 这几个方法对应于Activity或者Fragment中的生命周期方法。同时还自定义访问出错页面。
 
@@ -196,7 +170,7 @@ public class WebViewActivity extends AppCompatActivity {
 }
 ```
 
-#### 其他注意
+### 其他注意
 
 由于`WebViewActivity`中有实现视频全屏播放的功能，那么在`CustomWebView`中的初始化中需要对`WebView`作以下配置
 
@@ -232,7 +206,7 @@ void settings() {
 另外如果需要显示全屏，那么需要在`WebViewActivity`的`manifiest`中的`configChanges`属性配置如下:
 
 ```java
-<activity
+	<activity
             android:name=".WebViewActivity"
             android:label="Web"
             android:configChanges="orientation|screenSize|keyboardHidden"
