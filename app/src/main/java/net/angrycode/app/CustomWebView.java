@@ -119,6 +119,9 @@ public class CustomWebView extends WebView {
         } catch (Exception e) {
             Log.d(TAG, e.getMessage());
         }
+        if (canGoBack()) {
+                goBack();
+        }
 
         loadUrl(CUSTOM_ERROR_PAGE);
 
