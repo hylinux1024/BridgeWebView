@@ -1,4 +1,4 @@
-package net.angrycode.app;
+package net.angrycode.web;
 
 import android.app.Activity;
 import android.content.Context;

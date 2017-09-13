@@ -1,4 +1,4 @@
-package net.angrycode.app;
+package net.angrycode.web;
 
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
@@ -17,11 +17,11 @@ import java.util.Set;
  * 加强版WebViewClient可以定制网页访问出错页面
  * Created by wecodexyz on 2016/12/23.
  */
-public class CustomWebViewClient extends WebViewClient {
+public class BridgeWebViewClient extends WebViewClient {
 
-    private static final String TAG = CustomWebViewClient.class.getSimpleName();
+    private static final String TAG = BridgeWebViewClient.class.getSimpleName();
 
-    public CustomWebViewClient() {
+    public BridgeWebViewClient() {
     }
 
     @Override
@@ -55,9 +55,9 @@ public class CustomWebViewClient extends WebViewClient {
         boolean isMainFrame = view.getUrl() != null && view.getUrl().equals(failingUrl);
         String url = view.getUrl();
         //这判断非常重要，避免打开一个页面时，显示出来了内容，然后有被重定向到一个无效地址
-        if (isMainFrame || url.equalsIgnoreCase(CustomWebView.CUSTOM_ERROR_PAGE)) {//或者加载本地时也发生错误
-            if (view instanceof CustomWebView) {
-                ((CustomWebView) view).onErrorView(url);
+        if (isMainFrame || url.equalsIgnoreCase(BridgeWebView.CUSTOM_ERROR_PAGE)) {//或者加载本地时也发生错误
+            if (view instanceof BridgeWebView) {
+                ((BridgeWebView) view).onErrorView(url);
             }
         } else {
             Log.d(TAG, "did not show error view! reload url:" + view.getUrl());

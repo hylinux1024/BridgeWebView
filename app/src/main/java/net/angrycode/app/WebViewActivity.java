@@ -7,9 +7,13 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
+import net.angrycode.web.BridgeWebChromeClient;
+import net.angrycode.web.BridgeWebView;
+import net.angrycode.web.BridgeWebViewClient;
+
 public class WebViewActivity extends AppCompatActivity {
 
-    CustomWebView mWebView;
+    BridgeWebView mWebView;
     ProgressBar mProgressBar;
 
     @Override
@@ -18,11 +22,11 @@ public class WebViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_web_view);
         String url = getIntent().getStringExtra("url");
         initToolbar();
-        mWebView = (CustomWebView) findViewById(R.id.webview);
+        mWebView = (BridgeWebView) findViewById(R.id.webview);
         mProgressBar = (ProgressBar) findViewById(R.id.progress);
         mWebView.loadUrl(url);
-        mWebView.setWebViewClient(new CustomWebViewClient());
-        mWebView.setWebChromeClient(new CustomWebChromeClient() {
+        mWebView.setWebViewClient(new BridgeWebViewClient());
+        mWebView.setWebChromeClient(new BridgeWebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);

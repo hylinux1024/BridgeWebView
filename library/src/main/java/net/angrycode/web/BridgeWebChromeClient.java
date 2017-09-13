@@ -1,13 +1,12 @@
-package net.angrycode.app;
+package net.angrycode.web;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -19,11 +18,14 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.VideoView;
 
+import net.angrycode.library.R;
+
+
 /**
  * 加强版WebChromeClient
  * Created by wecodexyz on 2016/12/23.
  */
-public class CustomWebChromeClient extends WebChromeClient {
+public class BridgeWebChromeClient extends WebChromeClient {
 
     private static final int API = android.os.Build.VERSION.SDK_INT;
     private static final FrameLayout.LayoutParams COVER_SCREEN_PARAMS = new FrameLayout.LayoutParams(
@@ -36,7 +38,7 @@ public class CustomWebChromeClient extends WebChromeClient {
 
     private int mOriginalOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 
-    public CustomWebChromeClient() {
+    public BridgeWebChromeClient() {
     }
 
     @Override

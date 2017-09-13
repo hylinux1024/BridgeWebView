@@ -1,10 +1,11 @@
-package net.angrycode.app;
+package net.angrycode.web;
 
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.BuildConfig;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -19,37 +20,39 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import net.angrycode.library.R;
+
 import java.lang.reflect.Field;
 
 /**
  * 加强版WebView
  * Created by wecodexyz on 2016/12/23.
  */
-public class CustomWebView extends WebView {
+public class BridgeWebView extends WebView {
 
     public static final String CUSTOM_ERROR_PAGE = "file:///android_asset/error.html";
 
-    private static final String TAG = CustomWebView.class.getSimpleName();
+    private static final String TAG = BridgeWebView.class.getSimpleName();
 
     private String mReloadUrl;
 
-    public CustomWebView(Context context) {
+    public BridgeWebView(Context context) {
         super(context);
         init();
     }
 
-    public CustomWebView(Context context, AttributeSet attrs) {
+    public BridgeWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public CustomWebView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BridgeWebView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
     @TargetApi(21)
-    public CustomWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public BridgeWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

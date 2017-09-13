@@ -1,6 +1,8 @@
-package net.angrycode.app;
+package net.angrycode.web;
 
 import android.util.Log;
+
+import net.angrycode.library.BuildConfig;
 
 /**
  * Created by wecodexyz on 2016/12/23.
